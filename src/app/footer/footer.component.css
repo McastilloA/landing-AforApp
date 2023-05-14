@@ -1,0 +1,57 @@
+/* Ajust globls */
+.padding-space {
+  background-color: #7dccff;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+p,
+a {
+  font-size: 12px;
+}
+
+.list-icons li {
+  padding: 0 0.5rem;
+  text-align: center;
+  margin: 0;
+}
+
+.copy-rigth p {
+  padding: 10px 0;
+}
+
+li a fa-icon {
+  font-size: 25px;
+  color: #ffffff;
+}
+
+.social-network,
+.copy-rigth {
+  border-top: 1px solid #ffffff;
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+  .social-network ul.list-icons {
+    float: right;
+  }
+}
+
+/* Mobile */
+@media (max-width: 991px) {
+  footer {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .interest,
+  .legals {
+    border-bottom: 1px solid #ffffff;
+  }
+
+  .social-network ul.list-icons {
+    justify-content: center;
+  }
+}
