@@ -1,1 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  font-family: "CIBFontSans Bold";
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: #2C2A29 !important;
+}
+
+.diagonal-box:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: skewy(-4deg);
+  transform-origin: 50% 0;
+  outline: 1px solid rgba(0, 0, 0, 0);
+  backface-visibility: hidden;
+  z-index: -3;
+}
+
+.bg-blue-light:before {
+  background-color: #7dccff;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.bg-white:before {
+  background-color: #ffffff;
+}
+
+.bg-gray {
+  background-color: #f4f4f4;
+}
+
+.bg-gray:before {
+  background-color: #f4f4f4;
+}
+
+.fade-in-bottom {
+  animation: fade-in-bottom 0.6s ease-in-out both;
+}
+
+@keyframes fade-in-bottom {
+  from {
+    transform: translateX(0%);
+    -webkit-transform: translateY(50px);
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 1px solid white;
+  background-color: #7dccff;
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+@media (min-width: 992px) {
+  .nav-padding {
+    padding: 10px 150px !important;
+  }
+
+  .padding-space {
+    padding: 0 150px !important;
+  }
+}

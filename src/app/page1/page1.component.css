@@ -1,0 +1,18 @@
+/* #af-section1, */
+#af-section2 {
+  padding: 0 0 40px;
+  margin-top: 50px;
+}
+
+#af-main {
+  padding: 50px 0 100px;
+}
+
+#af-section2-father, #af-section4-father {
+  margin-top: -1px;
+  display: contents;
+}
+
+.w-80 {
+  max-width: 80%;
+}
