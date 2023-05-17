@@ -1,52 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
-
-:root {
-  font-family: "CIBFontSans Bold";
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: #2c2a29 !important;
+  text-align: justify;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-  color: #2C2A29 !important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+p,
+a, li {
+  font-family: "Open Sans", sans-serif;
+  text-align: justify;
+  /* font-family: 'Montserrat', sans-serif; */
+  /* font-family: "Poppins", sans-serif; */
+  /* font-family: "Roboto", sans-serif; */
 }
 
 .diagonal-box:before {
   content: "";
+  display: block;
   position: absolute;
+  width: 100%;
+  height: 70px;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  transform: skewy(-4deg);
-  transform-origin: 50% 0;
-  outline: 1px solid rgba(0, 0, 0, 0);
-  backface-visibility: hidden;
-  z-index: -3;
+  background-color: hsla(20, 100%, 50%, 0.6);
+  -webkit-transform: skew(0deg, -2deg);
+  -moz-transform: skew(0deg, -2deg);
+  -ms-transform: skew(0deg, -2deg);
+  -o-transform: skew(0deg, -2deg);
+  transform: skew(0deg, -2deg);
+  transform-origin: left;
+  z-index: -1;
 }
 
 .bg-blue-light:before {
   background-color: #7dccff;
 }
 
-.bg-white {
-  background-color: #ffffff;
+.bg-blue-light {
+  background-color: #7dccff;
+}
+
+.bg-blue-dark:before {
+  background-color: #1190cb;
+}
+
+.bg-blue-dark {
+  background-color: #1190cb;
 }
 
 .bg-white:before {
   background-color: #ffffff;
 }
 
-.bg-gray {
-  background-color: #f4f4f4;
+.bg-white {
+  background-color: #ffffff;
 }
 
 .bg-gray:before {
   background-color: #f4f4f4;
 }
 
-.fade-in-bottom {
-  animation: fade-in-bottom 0.6s ease-in-out both;
+.bg-gray {
+  background-color: #f4f4f4;
 }
 
-@keyframes fade-in-bottom {
+.fade-in-bottom {
+  animation: move-bottom 1s ease-in-out both;
+}
+
+@keyframes move-bottom {
   from {
     transform: translateX(0%);
     -webkit-transform: translateY(50px);
@@ -63,21 +101,22 @@ h1, h2, h3, h4, h5, h6, p {
 
 .carousel-control-prev,
 .carousel-control-next {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
-  border: 1px solid white;
+  border: 1px solid #ffffff;
   background-color: #7dccff;
   transform: translateY(-50%);
   top: 50%;
 }
 
+/* Desktop */
 @media (min-width: 992px) {
   .nav-padding {
     padding: 10px 150px !important;
   }
 
-  .padding-space {
+  .padding-container {
     padding: 0 150px !important;
   }
 }
