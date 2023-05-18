@@ -1,3 +1,4 @@
+/* Global */
 .text-ABC {
   text-transform: uppercase;
   font-family: verdana;
@@ -12,29 +13,11 @@
     1px 30px 60px rgba(16, 16, 16, 0.4);
 }
 
-/* .af-text:hover {
-  transform-origin: 50% 50%;
-  animation: move .9s ease-in-out forwards;
-}
-
-@keyframes move {
-  from {
-    transform: translateX(0%);
-    -webkit-transform: translateY(50px);
-    transform: translateY(50px);
-  }
-
-  to {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-} */
-
 /* Desktop */
 @media (min-width: 992px) {
   h2 {
     font-weight: 700;
-    font-size: 55px;
+    font-size: 50px;
   }
 
   #af-main {
