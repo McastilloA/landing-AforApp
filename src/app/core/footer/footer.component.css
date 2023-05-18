@@ -1,8 +1,4 @@
-/* Ajust globls */
-.padding-container {
-  background-color: #7dccff;
-}
-
+/* Global */
 h5 {
   font-size: 14px;
 }
@@ -10,6 +6,7 @@ h5 {
 p,
 a {
   font-size: 12px;
+  color: #2c2a29;
 }
 
 .list-icons li {

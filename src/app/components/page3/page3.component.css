@@ -1,0 +1,76 @@
+/* Global */
+.af-contactUs {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.af-contactUs,
+.af-contactUs h4,
+.af-contactUs p {
+  color: #ffffff !important;
+}
+
+.af-contactUs p {
+  display: inline-block;
+  margin-left: 15px !important;
+}
+
+.btn-primary {
+  background-color: #7dccff !important;
+  border-color: #7dccff;
+}
+
+#messageContactUs {
+  height: 100px;
+}
+
+ul li {
+  list-style: none;
+}
+
+.card {
+  border-radius: 15px;
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+  .af-contactUs-table {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+
+  .card {
+    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+    border: none;
+  }
+
+  .af-contactUs {
+    padding: 0 50px;
+  }
+
+  .card-body {
+    padding: 30px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 991px) {
+  .af-contactUs-table {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  .card {
+    border: none;
+    box-shadow: 10px 10px 60px #bebebe, -20px -20px 60px #ffffff;
+  }
+
+  .af-contactUs {
+    padding: 20px 16px;
+  }
+
+  #contactUS {
+    padding: 50px 16px;
+  }
+}

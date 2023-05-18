@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-page3',
+  selector: 'app-admin',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './page3.component.html',
-  styleUrls: ['./page3.component.css']
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
 })
-export class Page3Component implements OnInit {
+export class AdminComponent implements OnInit {
 
   constructor() { }
 
