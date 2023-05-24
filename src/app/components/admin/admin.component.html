@@ -1,1 +1,136 @@
-<p>admin works!</p>
+<section class="fade-in-bottom diagonal-box bg-white py-5" id="register" #register>
+  <div class="container padding-container">
+    <div class="card mb-4">
+      <div class="row g-0">
+        <div class="col-md-4 bg-blue-dark d-table af-register-table">
+          <div class="af-register">
+            <fa-icon [icon]="faQrcode" [size]="'8x'"></fa-icon>
+            <h4 class="text-center my-4">Ingresar usuario</h4>
+            <small>Fecha Actual: {{nowDate | date:'longDate'}}</small>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 af-forms">
+                <form [formGroup]="formGroupCapacity" class="form-floating">
+                  <div class="mb-4 form-floating">
+                    <input type="text" formControlName="name" class="form-control" maxlength="50" id="name" required>
+                    <label for="name">Nombres:*</label>
+                  </div>
+                  <div class="mb-4 form-floating">
+                    <input type="text" formControlName="lastName" class="form-control" maxlength="50" id="lastName"
+                      required>
+                    <label for="lastName">Apellidos:*</label>
+                  </div>
+                  <div class="row">
+                    <div class="col-md">
+                      <div class="mb-4 form-floating">
+                        <select class="form-select" formControlName="typeDocument" id="typeDocument">
+                          <option value="CC">Cédula de ciudadanía</option>
+                          <option value="TI"> Tarjeta de identidad </option>
+                          <option value="NIT">NIT</option>
+                          <option value="CE">Cédula de extranjeria </option>
+                          <option value="PAS">Pasaporte</option>
+                          <option value="CD">Carnet diplomático</option>
+                        </select>
+                        <label for="typeDocument">Tipo de documento:*</label>
+                      </div>
+                    </div>
+                    <div class="col-md">
+                      <div class="mb-4 form-floating">
+                        <input type="text" formControlName="document" class="form-control" maxlength="20" id="document"
+                          required>
+                        <label for="document">Documento:*</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-4 form-floating">
+                    <input type="email" formControlName="email" class="form-control" maxlength="100" id="email"
+                      required>
+                    <label for="email">Correo eletrónico:*</label>
+                    <div id="emailHelp" class="form-text">Nunca compartiremos tu correo electrónico.</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md">
+                      <div class="mb-4 form-floating">
+                        <input type="tel" formControlName="phone" class="form-control" maxlength="10" id="phone"
+                          required>
+                        <label for="phoneregister">Teléfono / Celular:*</label>
+                      </div>
+                    </div>
+                    <div class="col-md">
+                      <div class="mb-4 form-floating">
+                        <input type="date" formControlName="birthDate" class="form-control" id="birthDate" required>
+                        <label for="phoneregister">Fecha de nacimiento:*</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit" (click)="registerUser(table)"
+                      [disabled]="formGroupCapacity.invalid">Ingresar</button>
+                  </div>
+                  <small class="text-muted">* Los campos son obligatorios</small>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray py-5" id="table-edit" #table>
+  <div class="container">
+    <div class="card my-5">
+      <div class="table-responsive m-3">
+        <table class="table m-0 table-bordered table-hover">
+          <thead class="table-secondary">
+            <tr>
+              <th scope="col" class="text-uppercase">Nombres</th>
+              <th scope="col" class="text-uppercase">Apellidos</th>
+              <th scope="col" class="text-uppercase">Tipo</th>
+              <th scope="col" class="text-uppercase">Documento</th>
+              <th scope="col" class="text-uppercase">Correo electrónico</th>
+              <th scope="col" class="text-uppercase">Teléfono</th>
+              <th scope="col" class="text-uppercase">F.Nacimiento</th>
+              <th scope="col" class="text-uppercase">Ingreso</th>
+              <th scope="col" class="text-uppercase">Salida</th>
+              <th colspan="2" scope="col" class="text-center text-uppercase">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of listUsers?.data">
+              <td>{{user.name}}</td>
+              <td>{{user.lastName}}</td>
+              <td>{{user.typeDocument}}</td>
+              <td>{{user.document}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.phone}}</td>
+              <td>{{user.birthDate}}</td>
+              <td>{{user.timeNowDate}}</td>
+              <td>{{user.timeAfterDate}}</td>
+              <td>
+                <button type="button" class="btn btn-danger">
+                  <fa-icon [icon]="faTrash" [size]="'sm'"></fa-icon>
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-secondary" (click)="scrollToSectionTop(register)">
+                  <fa-icon [icon]="faEdit" [size]="'sm'"></fa-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-loading [hidden]="!showSpinner"></app-loading>
