@@ -7,27 +7,12 @@ import { Page2Component } from './components/page2/page2.component';
 import { Page3Component } from './components/page3/page3.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'inicio',
-    pathMatch: 'full',
-  },
-  {
-    path: 'inicio',
-    component: Page1Component
-  },
-  {
-    path: 'page2',
-    component: Page2Component
-  },
-  {
-    path: 'page3',
-    component: Page3Component
-  },
-  {
-    path: 'admin',
-    component: AdminComponent
-  }
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: 'inicio', component: Page1Component },
+  { path: 'page2', component: Page2Component },
+  { path: 'page3', component: Page3Component },
+  { path: 'admin', component: AdminComponent },
+  { path: "**", redirectTo: "inicio" }
 ];
 
 @NgModule({
