@@ -6,10 +6,13 @@ import { ListCapacityService } from 'src/app/shared/services/list-capacity.servi
 
 import { RespService } from 'src/app/shared/interfaces/respService';
 
-import { LoadingComponent } from 'src/app/core/loading/loading.component';
+import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
+
+import { Capacity } from 'src/app/shared/interfaces/capacity';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faQrcode, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faQrcode, faTrash, faEdit, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -26,10 +29,12 @@ export class AdminComponent implements OnInit {
   faQrcode = faQrcode;
   faTrash = faTrash;
   faEdit = faEdit;
+  faSignOut = faSignOut;
   formGroupCapacity!: FormGroup;
   nowDate = new Date();
   listUsers!: RespService;
   showSpinner!: boolean;
+  action = 0;
 
   constructor(private fb: FormBuilder, private datepipe: DatePipe, private listCapacityService: ListCapacityService) { }
 
@@ -38,8 +43,9 @@ export class AdminComponent implements OnInit {
     this.getAllUser();
   }
 
-  private capacityForm(): void {
+  capacityForm(): void {
     this.formGroupCapacity = this.fb.group({
+      id: [],
       name: [null, [Validators.required, Validators.maxLength(50)]],
       lastName: [null, [Validators.required, Validators.maxLength(50)]],
       typeDocument: [null, [Validators.required, Validators.maxLength(3)]],
@@ -51,35 +57,129 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  public registerUser(section: HTMLElement): void {
+  getAllUser(): void {
+    this.showSpinner = true;
+
+    this.listCapacityService.getAllCapacity().subscribe({
+      next: (resp: RespService) => {
+        this.listUsers = resp;
+        this.showSpinner = false;
+      },
+      error: () => {
+        this.showSpinner = false;
+        this.messageServerFail();
+      }
+    });
+  }
+
+  registerUser(): void {
     if (this.formGroupCapacity.valid) {
       this.showSpinner = true;
-      this.listCapacityService.addCapacity(this.formGroupCapacity.value).subscribe(resp => {
-        this.formGroupCapacity.reset();
-        this.getAllUser();
-        this.scrollToSectionBottom(section);
-      }, () => {
-        this.showSpinner = false;
+      this.listCapacityService.addCapacity(this.formGroupCapacity.value).subscribe({
+        next: (resp: RespService) => {
+          this.messageSuccess(resp.message);
+          this.formGroupCapacity.reset();
+          this.getAllUser();
+        },
+        error: () => {
+          this.showSpinner = false;
+          this.messageServerFail();
+        },
       });
     }
   }
 
-  private getAllUser(): void {
+  updateUser(): void {
+    if (this.formGroupCapacity.valid) {
+      this.showSpinner = true;
+      this.listCapacityService.updateCapacity(this.formGroupCapacity.value).subscribe({
+        next: (resp: RespService) => {
+          this.action = 0;
+          this.messageSuccess(resp.message);
+          this.formGroupCapacity.reset();
+          this.getAllUser();
+        },
+        error: () => {
+          this.showSpinner = false;
+          this.messageServerFail();
+        },
+      });
+    }
+  }
+
+  registerExit(): void {
     this.showSpinner = true;
-    this.listCapacityService.getAllCapacity().subscribe(resp => {
-      this.listUsers = resp;
-      this.showSpinner = false;
-    }, () => {
-      this.showSpinner = false;
+    this.listCapacityService.updateCapacity(this.formGroupCapacity.value).subscribe({
+      next: (resp: RespService) => {
+        this.messageSuccess(resp.message);
+        this.getAllUser();
+      },
+      error: () => {
+        this.showSpinner = false;
+        this.messageServerFail();
+      },
     });
   }
 
-  scrollToSectionTop(section: HTMLElement): void {
+  deleteUser(userId: Capacity): void {
+    this.showSpinner = true;
+    this.listCapacityService.deleteCapacity(userId).subscribe({
+      next: (resp: RespService) => {
+        this.messageSuccess(resp.message);
+        this.getAllUser();
+      },
+      error: () => {
+        this.showSpinner = false;
+        this.messageServerFail();
+      },
+    });
+  }
+
+  scrollToSectionTop(section: HTMLElement, userInfo: Capacity): void {
+    this.action = 1;
+    this.updateUserInField(userInfo);
     section.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
-  scrollToSectionBottom(section: HTMLElement): void {
-    section.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  updateUserInField(userInfo: Capacity) {
+    this.formGroupCapacity.patchValue({
+      id: userInfo.id,
+      name: userInfo.name,
+      lastName: userInfo.lastName,
+      typeDocument: userInfo.typeDocument,
+      document: userInfo.document,
+      email: userInfo.email,
+      phone: userInfo.phone,
+      birthDate: userInfo.birthDate,
+      timeNowDate: userInfo.timeNowDate
+    });
+  }
+
+  /**
+   * Función que abre el modal por falla de servidor.
+   */
+  messageServerFail() {
+    Swal.fire({
+      title: 'Error en el servidor',
+      text: '"Lo sentimos, se ha producido un error en el servidor y no se puede completar tu solicitud en este momento."',
+      icon: 'error',
+      confirmButtonText: 'Cerrar',
+      confirmButtonColor: '#3085d6',
+    });
+  }
+
+  /**
+   * Función que abre modal satisfactorio.
+   * @param message descripción del mensaje.
+   */
+  messageSuccess(message: any) {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: message,
+      showConfirmButton: false,
+      timer: 3000
+    });
   }
 
 }
