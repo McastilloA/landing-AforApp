@@ -29,7 +29,7 @@ export class ListCapacityService {
   }
 
   deleteCapacity(capacity: Capacity): Observable<RespService> {
-    return this.http.delete<RespService>(`${this.url.baseUrl}/${this.url.nameProject}/${this.url.controller}/delete.php?idcapacity=${capacity.id}`);
+    return this.http.delete<RespService>(`${this.url.baseUrl}/${this.url.nameProject}/${this.url.controller}/delete.php?idCapacity=${capacity.id}`);
   }
 
 }
