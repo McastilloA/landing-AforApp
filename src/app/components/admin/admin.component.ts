@@ -45,7 +45,7 @@ export class AdminComponent implements OnInit {
 
   capacityForm(): void {
     this.formGroupCapacity = this.fb.group({
-      id: [],
+      id: [null],
       name: [null, [Validators.required, Validators.maxLength(50)]],
       lastName: [null, [Validators.required, Validators.maxLength(50)]],
       typeDocument: [null, [Validators.required, Validators.maxLength(3)]],
@@ -53,21 +53,25 @@ export class AdminComponent implements OnInit {
       email: [null, [Validators.required, Validators.email, Validators.maxLength(30)]],
       phone: [null, [Validators.required, Validators.maxLength(10)]],
       birthDate: [null, [Validators.required]],
-      timeNowDate: [this.datepipe.transform(this.nowDate, 'yyyy-MM-dd hh:mm:ss')]
+      timeNowDate: [this.datepipe.transform(this.nowDate, 'yyyy-MM-dd hh:mm:ss')],
+      timeAfterDate: [null]
     });
   }
 
   getAllUser(): void {
     this.showSpinner = true;
-
     this.listCapacityService.getAllCapacity().subscribe({
       next: (resp: RespService) => {
-        this.listUsers = resp;
         this.showSpinner = false;
+        if (resp.status) {
+          this.listUsers = resp;
+        } else {
+          this.toastFail(resp.message);
+        }
       },
       error: () => {
         this.showSpinner = false;
-        this.messageServerFail();
+        this.modalFail();
       }
     });
   }
@@ -77,13 +81,18 @@ export class AdminComponent implements OnInit {
       this.showSpinner = true;
       this.listCapacityService.addCapacity(this.formGroupCapacity.value).subscribe({
         next: (resp: RespService) => {
-          this.messageSuccess(resp.message);
-          this.formGroupCapacity.reset();
-          this.getAllUser();
+          if (resp.status) {
+            this.getAllUser();
+            this.formGroupCapacity.reset();
+            this.toastSuccess(resp.message);
+          } else {
+            this.showSpinner = false;
+            this.toastFail(resp.message);
+          }
         },
         error: () => {
           this.showSpinner = false;
-          this.messageServerFail();
+          this.modalFail();
         },
       });
     }
@@ -94,29 +103,40 @@ export class AdminComponent implements OnInit {
       this.showSpinner = true;
       this.listCapacityService.updateCapacity(this.formGroupCapacity.value).subscribe({
         next: (resp: RespService) => {
-          this.action = 0;
-          this.messageSuccess(resp.message);
-          this.formGroupCapacity.reset();
-          this.getAllUser();
+          if (resp.status) {
+            this.action = 0;
+            this.getAllUser();
+            this.formGroupCapacity.reset();
+            this.toastSuccess(resp.message);
+          } else {
+            this.showSpinner = false;
+            this.toastFail(resp.message);
+          }
         },
         error: () => {
           this.showSpinner = false;
-          this.messageServerFail();
+          this.modalFail();
         },
       });
     }
   }
 
-  registerExit(): void {
+  registerExit(user: Capacity): void {
+    this.updateUserInFieldExit(user);
     this.showSpinner = true;
     this.listCapacityService.updateCapacity(this.formGroupCapacity.value).subscribe({
       next: (resp: RespService) => {
-        this.messageSuccess(resp.message);
-        this.getAllUser();
+        this.showSpinner = false;
+        if (resp.status) {
+          this.getAllUser();
+          this.toastSuccess(resp.message);
+        } else {
+          this.toastFail(resp.message);
+        }
       },
       error: () => {
         this.showSpinner = false;
-        this.messageServerFail();
+        this.modalFail();
       },
     });
   }
@@ -125,12 +145,17 @@ export class AdminComponent implements OnInit {
     this.showSpinner = true;
     this.listCapacityService.deleteCapacity(userId).subscribe({
       next: (resp: RespService) => {
-        this.messageSuccess(resp.message);
-        this.getAllUser();
+        if (resp.status) {
+          this.getAllUser();
+          this.toastSuccess(resp.message);
+        } else {
+          this.showSpinner = false;
+          this.toastFail(resp.message);
+        }
       },
       error: () => {
         this.showSpinner = false;
-        this.messageServerFail();
+        this.modalFail();
       },
     });
   }
@@ -151,16 +176,32 @@ export class AdminComponent implements OnInit {
       email: userInfo.email,
       phone: userInfo.phone,
       birthDate: userInfo.birthDate,
-      timeNowDate: userInfo.timeNowDate
+      timeNowDate: userInfo.timeNowDate,
+      timeAfterDate: userInfo.timeAfterDate
+    });
+  }
+
+  updateUserInFieldExit(userInfo: Capacity) {
+    this.formGroupCapacity.patchValue({
+      id: userInfo.id,
+      name: userInfo.name,
+      lastName: userInfo.lastName,
+      typeDocument: userInfo.typeDocument,
+      document: userInfo.document,
+      email: userInfo.email,
+      phone: userInfo.phone,
+      birthDate: userInfo.birthDate,
+      timeNowDate: userInfo.timeNowDate,
+      timeAfterDate: this.datepipe.transform(this.nowDate, 'yyyy-MM-dd hh:mm:ss')
     });
   }
 
   /**
    * Función que abre el modal por falla de servidor.
    */
-  messageServerFail() {
+  modalFail() {
     Swal.fire({
-      title: 'Error en el servidor',
+      title: 'Error del servidor',
       text: '"Lo sentimos, se ha producido un error en el servidor y no se puede completar tu solicitud en este momento."',
       icon: 'error',
       confirmButtonText: 'Cerrar',
@@ -169,16 +210,31 @@ export class AdminComponent implements OnInit {
   }
 
   /**
-   * Función que abre modal satisfactorio.
+   * Función que abre toast satisfactorio.
    * @param message descripción del mensaje.
    */
-  messageSuccess(message: any) {
+  toastSuccess(message: any) {
     Swal.fire({
-      position: 'top-end',
-      icon: 'success',
       title: message,
+      icon: 'success',
+      position: 'top-end',
       showConfirmButton: false,
       timer: 3000
+    });
+  }
+
+  /**
+   * Función que abre toast fallido.
+   * @param message descripción del mensaje.
+   */
+  toastFail(message: any) {
+    Swal.fire({
+      title: 'Error del servidor',
+      text: message,
+      icon: 'error',
+      position: 'top-right',
+      showConfirmButton: false,
+      timer: 4000
     });
   }
 
