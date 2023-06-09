@@ -1,0 +1,115 @@
+<section class="fade-in-bottom diagonal-box bg-white py-5" id="register" #register>
+  <div class="container padding-container">
+    <div class="card mb-4">
+      <div class="row g-0">
+        <div class="col-md-4 bg-blue-dark d-table af-register-table">
+          <div class="af-register">
+            <fa-icon [icon]="faUsers" [size]="'9x'"></fa-icon>
+            <h4 class="text-center my-4">Club de asociados</h4>
+            <small>Fecha Actual: {{nowDate | date:'longDate'}}</small>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 af-forms">
+                <form [formGroup]="formGroupAssociated" class="form-floating">
+                  <div class="mb-4 form-floating">
+                    <input type="text" formControlName="fullName" class="form-control" maxlength="50" id="fullName"
+                      required>
+                    <label for="fullName">Nombres completos:*</label>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-4 form-floating">
+                        <input type="email" formControlName="email" class="form-control" maxlength="30" id="email"
+                          required>
+                        <label for="email">Correo eletrónico:*</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-4 form-floating">
+                        <input type="tel" formControlName="phone" class="form-control" maxlength="10" id="phone"
+                          required>
+                        <label for="phone">Teléfono / Celular:*</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-4 form-floating">
+                    <input type="text" class="form-control" id="affair" formControlName="affair" maxlength="50"
+                      required>
+                    <label for="affair">Asunto:*</label>
+                  </div>
+                  <div class="mb-4 form-floating">
+                    <textarea class="form-control" id="messageContactUs" formControlName="message"></textarea>
+                    <label for="messageContactUs">Mensaje:</label>
+                  </div>
+
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit" (click)="updateUser()"
+                      [disabled]="formGroupAssociated.invalid">Actualizar
+                    </button>
+                  </div>
+                  <small class="text-muted">* Los campos son obligatorios</small>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray py-5" id="table-edit">
+  <div class="container">
+    <div class="card my-5">
+      <div class="mx-3 mt-3 py-4 bg-blue-light rounded-3">
+        <h3 class="text-center m-0 text-uppercase">Listado de asociados</h3>
+      </div>
+      <div class="table-responsive m-3">
+        <table class="table m-0 table-bordered table-hover">
+          <thead class="table-secondary">
+            <tr>
+              <th scope="col" class="text-uppercase">Nombre completo</th>
+              <th scope="col" class="text-uppercase">Correo</th>
+              <th scope="col" class="text-uppercase">Teléfono</th>
+              <th scope="col" class="text-uppercase">Fecha</th>
+              <th scope="col" class="text-uppercase">Asunto</th>
+              <th scope="col" class="text-uppercase">Mensaje</th>
+              <th colspan="3" scope="col" class="text-center text-uppercase">Acción</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="listAssociated?.data">
+            <tr *ngFor="let user of listAssociated?.data">
+              <td class="text-capitalize">{{user.fullName}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.phone}}</td>
+              <td>{{user.timeNowDate}}</td>
+              <td class="text-capitalize">{{user.affair}}</td>
+              <td>{{user.message}}</td>
+              <td class="text-center">
+                <button type="button" class="btn btn-danger" (click)="deleteUser(user)">
+                  <fa-icon [icon]="faTrash" [size]="'sm'"></fa-icon>
+                </button>
+              </td>
+              <td class="text-center">
+                <button type="button" class="btn btn-secondary" (click)="scrollToSectionTop(register, user)">
+                  <fa-icon [icon]="faEdit" [size]="'sm'"></fa-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h5 class="text-center my-4 p-4 bg-gray" *ngIf="!listAssociated?.data">
+          Lo sentimos, no se encontraron registros en la base de datos en este momento.
+        </h5>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-loading [hidden]="!showSpinner"></app-loading>

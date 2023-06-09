@@ -7,13 +7,13 @@
       exit("Solo se admiten peticiones DELETE para actualizar información.");
     }
 
-    if (empty($_GET["idCapacity"])) {
+    if (empty($_GET["idAssociated"])) {
       exit("No existen id de usuarios para eliminar");
     }
 
-    $idCapacity = $_GET["idCapacity"];
-    $sql = $bd->prepare("DELETE FROM capacity WHERE id = ?");
-    $response = $sql->execute([$idCapacity]);
+    $idAssociated = $_GET["idAssociated"];
+    $sql = $bd->prepare("DELETE FROM associated WHERE id = ?");
+    $response = $sql->execute([$idAssociated]);
 
     if ($response) {
       echo json_encode([
@@ -22,7 +22,7 @@
         "message" => "El registro ha sido eliminado exitosamente."
       ]);
     } else {
-      throw new Exception("Error en el momento de eliminar en la base de datos.");
+      throw new Exception("Error en el momento de eliminar un asociado en la base de datos.");
     }
   } catch (PDOException $e) {
     echo json_encode([

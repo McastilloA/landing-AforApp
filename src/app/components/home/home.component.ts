@@ -6,13 +6,13 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-page1',
+  selector: 'app-home',
   standalone: true,
   imports: [CommonModule, FontAwesomeModule],
-  templateUrl: './page1.component.html',
-  styleUrls: ['./page1.component.css']
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class Page1Component implements OnInit {
+export class HomeComponent implements OnInit {
 
   /** Variabls globales */
   faArrowLeft = faArrowLeft;

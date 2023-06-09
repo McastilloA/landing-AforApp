@@ -59,13 +59,13 @@
                       <div class="mb-4 form-floating">
                         <input type="tel" formControlName="phone" class="form-control" maxlength="10" id="phone"
                           required>
-                        <label for="phoneregister">Teléfono / Celular:*</label>
+                        <label for="phone">Teléfono / Celular:*</label>
                       </div>
                     </div>
                     <div class="col-md">
                       <div class="mb-4 form-floating">
                         <input type="date" formControlName="birthDate" class="form-control" id="birthDate" required>
-                        <label for="phoneregister">Fecha de nacimiento:*</label>
+                        <label for="birthDate">Fecha de nacimiento:*</label>
                       </div>
                     </div>
                   </div>
@@ -90,6 +90,9 @@
 <section class="bg-gray py-5" id="table-edit">
   <div class="container">
     <div class="card my-5">
+      <div class="mx-3 mt-3 py-4 bg-blue-light rounded-3">
+        <h3 class="text-center m-0 text-uppercase">Listado de usuarios registrados</h3>
+      </div>
       <div class="table-responsive m-3">
         <table class="table m-0 table-bordered table-hover">
           <thead class="table-secondary">
@@ -98,7 +101,7 @@
               <th scope="col" class="text-uppercase">Apellidos</th>
               <th scope="col" class="text-uppercase">Tipo</th>
               <th scope="col" class="text-uppercase">Documento</th>
-              <th scope="col" class="text-uppercase">Correo electrónico</th>
+              <th scope="col" class="text-uppercase">Correo</th>
               <th scope="col" class="text-uppercase">Teléfono</th>
               <th scope="col" class="text-uppercase">F.Nacimiento</th>
               <th scope="col" class="text-uppercase">Ingreso</th>
@@ -108,8 +111,8 @@
           </thead>
           <tbody *ngIf="listUsers?.data">
             <tr *ngFor="let user of listUsers?.data">
-              <td>{{user.name}}</td>
-              <td>{{user.lastName}}</td>
+              <td class="text-capitalize">{{user.name}}</td>
+              <td class="text-capitalize">{{user.lastName}}</td>
               <td>{{user.typeDocument}}</td>
               <td>{{user.document}}</td>
               <td>{{user.email}}</td>
@@ -117,18 +120,19 @@
               <td>{{user.birthDate}}</td>
               <td>{{user.timeNowDate}}</td>
               <td>{{user.timeAfterDate}}</td>
-              <td>
-                <button type="button" class="btn btn-danger" (click)="deleteUser(user)">
+              <td class="text-center">
+                <button type="button" class="btn btn-danger" (click)="deleteUser(user)" [disabled]="user.timeAfterDate">
                   <fa-icon [icon]="faTrash" [size]="'sm'"></fa-icon>
                 </button>
               </td>
-              <td>
-                <button type="button" class="btn btn-secondary" (click)="scrollToSectionTop(register, user)">
+              <td class="text-center">
+                <button type="button" class="btn btn-secondary" (click)="scrollToSectionTop(register, user)"
+                  [disabled]="user.timeAfterDate">
                   <fa-icon [icon]="faEdit" [size]="'sm'"></fa-icon>
                 </button>
               </td>
-              <td>
-                <button type="button" class="btn btn-primary" (click)="registerExit(user)">
+              <td class="text-center">
+                <button type="button" class="btn btn-primary" (click)="registerExit(user)" [disabled]="user.timeAfterDate">
                   <fa-icon [icon]="faSignOut" [size]="'sm'"></fa-icon>
                 </button>
               </td>

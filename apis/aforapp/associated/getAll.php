@@ -2,7 +2,7 @@
   try {
     $bd = include_once "../database.php";
 
-    $sql = $bd->query("SELECT * FROM capacity ORDER BY name");
+    $sql = $bd->query("SELECT * FROM associated ORDER BY fullName");
     $response = $sql->fetchAll(PDO::FETCH_OBJ);
 
     if ($response) {

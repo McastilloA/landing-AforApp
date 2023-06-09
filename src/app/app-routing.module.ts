@@ -2,16 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminComponent } from './components/admin/admin.component';
-import { Page1Component } from './components/page1/page1.component';
-import { Page2Component } from './components/page2/page2.component';
-import { Page3Component } from './components/page3/page3.component';
+import { HomeComponent } from './components/home/home.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { AssociatedComponent } from './components/associated/associated.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'inicio', component: Page1Component },
-  { path: 'page2', component: Page2Component },
-  { path: 'page3', component: Page3Component },
+  { path: 'inicio', component: HomeComponent },
+  { path: 'aboutUs', component: AboutUsComponent },
+  { path: 'contactUs', component: ContactUsComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'associated', component: AssociatedComponent },
   { path: "**", redirectTo: "inicio" }
 ];
 

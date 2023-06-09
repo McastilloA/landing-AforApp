@@ -7,35 +7,29 @@
       exit("Solo se admiten peticiones PUT para actualizar información.");
     }
 
-    $reqCapacity = json_decode(file_get_contents("php://input"));
+    $reqAssociated = json_decode(file_get_contents("php://input"));
 
-    if (!$reqCapacity) {
+    if (!$reqAssociated) {
       exit("No existen datos correctos.");
     }
 
-    $sql = $bd->prepare("UPDATE capacity SET 
-    name = ?, 
-    lastName = ?, 
-    typeDocument = ?, 
-    document = ?, 
+    $sql = $bd->prepare("UPDATE associated SET 
+    fullName = ?,
     email = ?, 
     phone = ?, 
-    birthDate = ?, 
     timeNowDate = ?,
-    timeAfterDate = ?
+    affair = ?,
+    message = ?
     WHERE id = ?");
     
     $response = $sql->execute([
-        $reqCapacity->name,
-        $reqCapacity->lastName,
-        $reqCapacity->typeDocument,
-        $reqCapacity->document,
-        $reqCapacity->email,
-        $reqCapacity->phone,
-        $reqCapacity->birthDate,
-        $reqCapacity->timeNowDate,
-        $reqCapacity->timeAfterDate,
-        $reqCapacity->id
+        $reqAssociated->fullName,
+        $reqAssociated->email,
+        $reqAssociated->phone,
+        $reqAssociated->timeNowDate,
+        $reqAssociated->affair,
+        $reqAssociated->message,
+        $reqAssociated->id
     ]);
 
     if ($response) {
@@ -45,7 +39,7 @@
         "message" => "El registro ha sido actualizado exitosamente."
       ]);
     } else {
-      throw new Exception("Error en el momento de actualizar en la base de datos.");
+      throw new Exception("Error en el momento de actualizar un asociado en la base de datos.");
     }
   } catch (PDOException $e) {
     echo json_encode([

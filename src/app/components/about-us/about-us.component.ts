@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-alert',
+  selector: 'app-about-us',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.css']
+  templateUrl: './about-us.component.html',
+  styleUrls: ['./about-us.component.css']
 })
-export class AlertComponent implements OnInit {
+export class AboutUsComponent implements OnInit {
 
   constructor() { }
 

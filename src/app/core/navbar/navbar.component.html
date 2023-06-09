@@ -14,24 +14,29 @@
             Inicio
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="page2" routerLinkActive="router-link-active">
+        <li class="nav-item" *ngIf="stateRol === 'user'">
+          <a class="nav-link" routerLink="aboutUs" routerLinkActive="router-link-active">
             Quiénes somos
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="stateRol === 'user'">
           <a class="nav-link" routerLink="inicio" fragment="af-section4" routerLinkActive="router-link-active">
             Testimonios
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="page3" routerLinkActive="router-link-active">
+        <li class="nav-item" *ngIf="stateRol === 'user'">
+          <a class="nav-link" routerLink="contactUs" routerLinkActive="router-link-active">
             Contáctanos
           </a>
         </li>
         <li class="nav-item" *ngIf="stateRol === 'admin'">
           <a class="nav-link" routerLink="admin" routerLinkActive="router-link-active">
             Admin
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="stateRol === 'user'">
+          <a class="nav-link" routerLink="associated" routerLinkActive="router-link-active">
+            Asociados
           </a>
         </li>
       </ul>
