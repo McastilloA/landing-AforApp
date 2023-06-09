@@ -8,14 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   /** Variabls globales */
-  stateRol = 'admin';
+  stateRol!: string;
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.validateRol();
+  }
 
   validateRol() {
-    this.stateRol = sessionStorage.getItem('rol')!;
+    if (sessionStorage.getItem('rol')) {
+      this.stateRol = sessionStorage.getItem('rol')!;
+    } else {
+      this.stateRol = 'user';
+    }
   }
 
 }

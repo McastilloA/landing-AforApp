@@ -2,22 +2,20 @@
 
   try {
     $bd = include_once "../database.php";
-    $reqCapacity = json_decode(file_get_contents("php://input"));
+    $reqAssociated = json_decode(file_get_contents("php://input"));
     
-    if (!$reqCapacity) {
+    if (!$reqAssociated) {
         exit("No existen datos correctos.");
     }
 
-    $sql = $bd->prepare("INSERT INTO capacity(name, lastName, typeDocument, document, email, phone, birthDate, timeNowDate) VALUES (?,?,?,?,?,?,?,?)");
+    $sql = $bd->prepare("INSERT INTO associated(fullName, email, phone, timeNowDate, affair, message) VALUES (?,?,?,?,?,?)");
     $response = $sql->execute([
-        $reqCapacity->name,
-        $reqCapacity->lastName,
-        $reqCapacity->typeDocument,
-        $reqCapacity->document,
-        $reqCapacity->email,
-        $reqCapacity->phone,
-        $reqCapacity->birthDate,
-        $reqCapacity->timeNowDate
+        $reqAssociated->fullName,
+        $reqAssociated->email,
+        $reqAssociated->phone,
+        $reqAssociated->timeNowDate,
+        $reqAssociated->affair,
+        $reqAssociated->message
     ]);
 
     if ($response) {
@@ -27,7 +25,7 @@
         "message" => "El registro ha sido creado exitosamente."
       ]);
     } else {
-      throw new Exception("Error en el momento de crear en la base de datos.");
+      throw new Exception("Error en el momento de crear un asociado en la base de datos.");
     }
   } catch (PDOException $e) {
     echo json_encode([

@@ -28,26 +28,35 @@
             <h5 class="text-start mb-4">Envia tu mensaje</h5>
             <div class="row">
               <div class="col-12 af-forms">
-                <form action="POST" class="form-floating">
+                <form [formGroup]="formGroupAssociated" class="form-floating">
                   <div class="mb-4 form-floating">
-                    <input type="text" class="form-control" id="nameContactUs" required>
+                    <input type="text" class="form-control" id="nameContactUs" formControlName="fullName" maxlength="50"
+                      required>
                     <label for="nameContactUs">Nombre completo:*</label>
                   </div>
                   <div class="mb-4 form-floating">
-                    <input type="email" class="form-control" id="emailContactUs" required>
+                    <input type="email" class="form-control" id="emailContactUs" formControlName="email" maxlength="30"
+                      required>
                     <label for="emailContactUs">Correo eletrónico:*</label>
                     <div id="emailHelp" class="form-text">Nunca compartiremos tu correo electrónico.</div>
                   </div>
                   <div class="mb-4 form-floating">
-                    <input type="tel" class="form-control" id="phoneContactUs" required>
+                    <input type="tel" class="form-control" id="phoneContactUs" formControlName="phone" maxlength="10"
+                      required>
                     <label for="phoneContactUs">Teléfono / Celular:*</label>
                   </div>
                   <div class="mb-4 form-floating">
-                    <textarea class="form-control" id="messageContactUs"></textarea>
+                    <input type="text" class="form-control" id="AffairUs" formControlName="affair" maxlength="50"
+                      required>
+                    <label for="AffairUs">Asunto:*</label>
+                  </div>
+                  <div class="mb-4 form-floating">
+                    <textarea class="form-control" id="messageContactUs" formControlName="message"></textarea>
                     <label for="messageContactUs">Mensaje:</label>
                   </div>
                   <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="button">Enviar</button>
+                    <button class="btn btn-primary" type="submit" (click)="registerUser()"
+                      [disabled]="formGroupAssociated.invalid">Enviar</button>
                   </div>
                   <small class="text-muted">* Los campos son obligatorios</small>
                 </form>
@@ -59,3 +68,5 @@
     </div>
   </div>
 </section>
+
+<app-loading [hidden]="!showSpinner"></app-loading>
