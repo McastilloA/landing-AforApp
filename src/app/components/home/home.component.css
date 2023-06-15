@@ -56,7 +56,7 @@
 /* Mobile */
 @media (max-width: 991px) {
   #af-main .af-video iframe {
-    width: 335px !important;
+    width: 100% !important;
   }
 
   #af-main,

@@ -92,14 +92,23 @@
               <td class="text-capitalize">{{user.affair}}</td>
               <td>{{user.message}}</td>
               <td class="text-center">
-                <button type="button" class="btn btn-danger" (click)="deleteUser(user)">
-                  <fa-icon [icon]="faTrash" [size]="'sm'"></fa-icon>
-                </button>
-              </td>
-              <td class="text-center">
                 <button type="button" class="btn btn-secondary" (click)="scrollToSectionTop(register, user)">
                   <fa-icon [icon]="faEdit" [size]="'sm'"></fa-icon>
                 </button>
+              </td>
+              <td class="text-center">
+                <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer" class="btn btn-success">
+                  <fa-icon [icon]="faPhone" [size]="'sm'"></fa-icon>
+                </a>
+                <!-- <button type="button" class="btn btn-success" (click)="deleteUser(user)">
+                  <fa-icon [icon]="faPhone" [size]="'sm'"></fa-icon>
+                </button> -->
+              </td>
+              <td class="text-center">
+                <a href="https://outlook.live.com/" target="_blank" rel="noopener noreferrer"
+                  class="btn btn-info text-white">
+                  <fa-icon [icon]="faEnvelope" [size]="'sm'"></fa-icon>
+                </a>
               </td>
             </tr>
           </tbody>

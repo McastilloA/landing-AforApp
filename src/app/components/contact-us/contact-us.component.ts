@@ -27,7 +27,7 @@ export class ContactUsComponent implements OnInit {
   faEnvelope = faEnvelope;
   faPhone = faPhone;
   faMapMarkerAlt = faMapMarkerAlt;
-  nowDate = new Date();
+  nowDate!: Date;
   formGroupAssociated!: FormGroup;
   showSpinner!: boolean;
 
@@ -40,6 +40,7 @@ export class ContactUsComponent implements OnInit {
   }
 
   intiForm(): void {
+    this.nowDate = new Date();
     this.formGroupAssociated = this.fb.group({
       id: [null],
       fullName: [null, [Validators.required, Validators.maxLength(50)]],
