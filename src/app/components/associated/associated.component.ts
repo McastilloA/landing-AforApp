@@ -11,7 +11,7 @@ import { RespServiceAssociated } from 'src/app/shared/interfaces/respService';
 import { Associated } from 'src/app/shared/interfaces/associated';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faUsers, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faUsers, faPhone, faEdit, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-associated',
@@ -25,9 +25,10 @@ export class AssociatedComponent implements OnInit {
 
   /** Variabls globales */
   faUsers = faUsers;
-  faTrash = faTrash;
+  faPhone = faPhone;
+  faEnvelope = faEnvelope;
   faEdit = faEdit;
-  nowDate = new Date();
+  nowDate!: Date;
   formGroupAssociated!: FormGroup;
   listAssociated!: RespServiceAssociated;
   showSpinner!: boolean;
@@ -41,6 +42,7 @@ export class AssociatedComponent implements OnInit {
   }
 
   intiForm(): void {
+    this.nowDate = new Date();
     this.formGroupAssociated = this.fb.group({
       id: [null],
       fullName: [null, [Validators.required, Validators.maxLength(50)]],
