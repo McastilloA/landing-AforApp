@@ -46,7 +46,7 @@ jobs:
       - name: Deploy to pages
         uses: crazy-max/ghaction-github-pages@v4.0.0
         with:
-          target_branch: "trunk"
+          target_branch: "gh-pages"
           build_dir: dist/proyecto-final-unidad1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
