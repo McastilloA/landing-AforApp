@@ -94,40 +94,40 @@ export class AssociatedComponent implements OnInit {
     }
   }
 
-  deleteUser(userId: Associated): void {
-    this.showSpinner = true;
-    this.listAssociatedService.deleteAssociated(userId).subscribe({
-      next: (resp: RespServiceAssociated) => {
-        if (resp.status) {
-          this.getAllUser();
-          this.alertService.toastSuccess(resp.message);
-        } else {
-          this.showSpinner = false;
-          this.alertService.toastFail(resp.message);
-        }
-      },
-      error: () => {
-        this.showSpinner = false;
-        this.alertService.modalFail();
-      },
-    });
-  }
+  // deleteUser(userId: Associated): void {
+  //   this.showSpinner = true;
+  //   this.listAssociatedService.deleteAssociated(userId).subscribe({
+  //     next: (resp: RespServiceAssociated) => {
+  //       if (resp.status) {
+  //         this.getAllUser();
+  //         this.alertService.toastSuccess(resp.message);
+  //       } else {
+  //         this.showSpinner = false;
+  //         this.alertService.toastFail(resp.message);
+  //       }
+  //     },
+  //     error: () => {
+  //       this.showSpinner = false;
+  //       this.alertService.modalFail();
+  //     },
+  //   });
+  // }
 
-  scrollToSectionTop(section: HTMLElement, userInfo: Associated): void {
-    this.updateUserInField(userInfo);
-    section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
+  // scrollToSectionTop(section: HTMLElement, userInfo: Associated): void {
+  //   this.updateUserInField(userInfo);
+  //   section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // }
 
-  updateUserInField(userInfo: Associated) {
-    this.formGroupAssociated.patchValue({
-      id: userInfo.id,
-      fullName: userInfo.fullName,
-      email: userInfo.email,
-      phone: userInfo.phone,
-      timeNowDate: userInfo.timeNowDate,
-      affair: userInfo.affair,
-      message: userInfo.message
-    });
-  }
+  // updateUserInField(userInfo: Associated) {
+  //   this.formGroupAssociated.patchValue({
+  //     id: userInfo.id,
+  //     fullName: userInfo.fullName,
+  //     email: userInfo.email,
+  //     phone: userInfo.phone,
+  //     timeNowDate: userInfo.timeNowDate,
+  //     affair: userInfo.affair,
+  //     message: userInfo.message
+  //   });
+  // }
 
 }
