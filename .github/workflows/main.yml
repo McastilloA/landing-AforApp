@@ -40,7 +40,7 @@ jobs:
 
       # Rename name dist/project to dist/404 for Route dinamic
       - name: Rename index for routing
-        run: move dist/proyecto-final-unidad1/index.html dist/proyecto-final-unidad1/404.html
+        run: mv dist/proyecto-final-unidad1/index.html dist/proyecto-final-unidad1/404.html
 
       # Deploy to GitHub Pages
       - name: Deploy to pages
