@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "build:prod": "ng build --base-href https://mcastilloa.github.io/ProyectoFinalUnidad1/",
+    "build:prod": "ng build --configuration production --base-href /ProyectoFinalUnidad1/",
     "deploy": "ng deploy --base-href https://mcastilloa.github.io/ProyectoFinalUnidad1/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

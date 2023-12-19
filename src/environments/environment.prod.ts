@@ -3,5 +3,5 @@ export const environment = {
   nameProject: 'aforapp',
   controllerCapacity: 'capacity',
   controllerAssociated: 'associated',
-  baseUrl: 'http://localhost/apis'
+  baseUrl: 'https://901rbhml-8080.use.devtunnels.ms/apis'
 };
