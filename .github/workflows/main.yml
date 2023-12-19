@@ -34,16 +34,19 @@ jobs:
       - name: Install Dependency
         run: npm install
 
-      # Runs a single command using the runners shell
+      # Build the Bundle to Preoject
       - name: Build App Bundle
         run: npm run build:prod
 
-      # Runs a set of commands using the runners shell
+      # Rename name dist/project to dist/404 for Route dinamic
+      - name: Rename index for routing
+        run: move dist/proyecto-final-unidad1/index.html dist/proyecto-final-unidad1/404.html
+
+      # Deploy to GitHub Pages
       - name: Deploy to pages
         uses: crazy-max/ghaction-github-pages@v4.0.0
         with:
-          # Git branch where assets will be deployed
-          target_branch: "trunk"
+          target_branch: "gh-pages"
           build_dir: dist/proyecto-final-unidad1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
