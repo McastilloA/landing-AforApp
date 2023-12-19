@@ -21,7 +21,7 @@
   }
 
   #af-main {
-    padding: 80px 0 100px;
+    padding: 160px 0 100px;
   }
 
   #af-section1 {
@@ -47,7 +47,18 @@
 
 /* Mobile */
 @media (max-width: 991px) {
-  #af-main,
+  #af-main {
+    padding: 130px 16px 50px;
+  }
+
+  .af-video {
+    order: 1;
+  }
+
+  .af-description {
+    order: 2;
+  }
+
   #af-section1,
   #af-section2,
   #af-section3 {

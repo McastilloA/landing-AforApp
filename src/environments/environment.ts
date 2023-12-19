@@ -7,7 +7,7 @@ export const environment = {
   nameProject: 'aforapp',
   controllerCapacity: 'capacity',
   controllerAssociated: 'associated',
-  baseUrl: 'http://localhost/apis'
+  baseUrl: 'http://localhost:8080/apis'
 };
 
 /*

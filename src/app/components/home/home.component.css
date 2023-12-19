@@ -23,7 +23,7 @@
   }
 
   #af-main {
-    padding: 80px 0 100px;
+    padding: 160px 0 100px;
   }
 
   #af-section1,
@@ -59,7 +59,18 @@
     width: 100% !important;
   }
 
-  #af-main,
+  #af-main {
+    padding: 130px 16px 50px;
+  }
+
+  .af-text {
+    order: 1;
+  }
+
+  .af-description {
+    order: 2;
+  }
+
   #af-section1,
   #af-section2,
   #af-section3,

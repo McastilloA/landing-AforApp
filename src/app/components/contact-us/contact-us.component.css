@@ -1,4 +1,8 @@
 /* Global */
+#contactUS {
+  padding: 160px 0 48px;
+}
+
 .af-contactUs {
   display: table-cell;
   vertical-align: middle;
@@ -71,6 +75,6 @@ ul li {
   }
 
   #contactUS {
-    padding: 50px 16px;
+    padding: 130px 16px 50px;
   }
 }
