@@ -1,19 +1,16 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { ListCapacityService } from 'src/app/shared/services/capacity/list-capacity.service';
-
-import { RespService } from 'src/app/shared/interfaces/respService';
-
+import { SetMetaTagService } from 'src/app/shared/services/setMetaTag/setMetaTag.service';
 import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
-
+import { RespService } from 'src/app/shared/interfaces/respService';
 import { Capacity } from 'src/app/shared/interfaces/capacity';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faQrcode, faTrash, faEdit, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-admin',
@@ -26,17 +23,20 @@ import Swal from 'sweetalert2';
 export class AdminComponent implements OnInit {
 
   /** Variabls globales */
-  faQrcode = faQrcode;
-  faTrash = faTrash;
-  faEdit = faEdit;
-  faSignOut = faSignOut;
-  formGroupCapacity!: FormGroup;
-  nowDate!: Date;
-  listUsers!: RespService;
-  showSpinner!: boolean;
-  action = 0;
+  public faQrcode = faQrcode;
+  public faTrash = faTrash;
+  public faEdit = faEdit;
+  public faSignOut = faSignOut;
+  public formGroupCapacity!: FormGroup;
+  public nowDate!: Date;
+  public listUsers!: RespService;
+  public showSpinner!: boolean;
+  public action = 0;
+  private setMetaTagService = inject(SetMetaTagService);
 
-  constructor(private fb: FormBuilder, private datepipe: DatePipe, private listCapacityService: ListCapacityService) { }
+  constructor(private fb: FormBuilder, private datepipe: DatePipe, private listCapacityService: ListCapacityService) {
+    this.setMetaTagService.setMetaTag('Admin', 'Listado de usuarios registrados', 'usuarios, listado, datos, ingresar datos');
+  }
 
   ngOnInit(): void {
     this.capacityForm();

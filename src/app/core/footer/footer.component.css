@@ -1,6 +1,13 @@
 /* Global */
-h5 {
+.h5 {
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #2c2a29 !important;
+  text-align: justify;
 }
 
 p,

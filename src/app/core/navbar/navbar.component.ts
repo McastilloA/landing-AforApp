@@ -1,27 +1,30 @@
+import { NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  standalone: true,
+  imports: [RouterModule, NgIf, NgOptimizedImage],
+  templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
 
   /** Variabls globales */
   stateRol!: string;
 
-  constructor() { }
-
   ngOnInit(): void {
     this.validateRol();
   }
 
-  validateRol() {
-    if (sessionStorage.getItem('rol')) {
-      this.stateRol = sessionStorage.getItem('rol')!;
-    } else {
-      this.stateRol = 'user';
-    }
+  /**
+   * Validates the user's role by checking if the 'rol' key exists in the sessionStorage.
+   * If it does, the value of the 'rol' key is assigned to the 'stateRol' variable.
+   * If it doesn't, the 'stateRol' variable is assigned the value 'user'.
+   * @returns {void}
+   */
+  validateRol(): void {
+    this.stateRol = sessionStorage.getItem('rol') || 'user';
   }
 
 }
