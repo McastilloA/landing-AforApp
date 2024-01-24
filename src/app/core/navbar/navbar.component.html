@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg fixed-top bg-gray nav-padding">
   <div class="container">
-    <a class="navbar-brand" routerLink="inicio" fragment="af-main" routerLinkActive="router-link-active">
-      <img src="assets/img/logo.png" alt="Logo" height="60" class="d-inline-block align-text-top">
+    <a class="navbar-brand" [routerLink]="['/inicio']" fragment="af-main">
+      <img [ngSrc]="'assets/img/logo.WEBP'" width="140" height="60" class="d-inline-block align-text-top" alt="Logo"
+        priority>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,35 +11,40 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="inicio" fragment="af-main" routerLinkActive="router-link-active">
+          <a class="nav-link active" [routerLink]="['/inicio']" fragment="af-main" routerLinkActive="router-link-active">
             Inicio
           </a>
         </li>
-        <li class="nav-item" *ngIf="stateRol === 'user'">
-          <a class="nav-link" routerLink="aboutUs" routerLinkActive="router-link-active">
-            Quiénes somos
-          </a>
-        </li>
-        <li class="nav-item" *ngIf="stateRol === 'user'">
-          <a class="nav-link" routerLink="inicio" fragment="af-section4" routerLinkActive="router-link-active">
-            Testimonios
-          </a>
-        </li>
-        <li class="nav-item" *ngIf="stateRol === 'user'">
-          <a class="nav-link" routerLink="contactUs" routerLinkActive="router-link-active">
-            Contáctanos
-          </a>
-        </li>
-        <li class="nav-item" *ngIf="stateRol === 'admin'">
-          <a class="nav-link" routerLink="admin" routerLinkActive="router-link-active">
-            Admin
-          </a>
-        </li>
-        <li class="nav-item" *ngIf="stateRol === 'admin'">
-          <a class="nav-link" routerLink="associated" routerLinkActive="router-link-active">
-            Asociados
-          </a>
-        </li>
+        <ng-container *ngIf="stateRol === 'user';else templateName">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/aboutUs']">
+              Quiénes somos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/inicio']" fragment="af-section4">
+              Testimonios
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/contactUs']">
+              Contáctanos
+            </a>
+          </li>
+        </ng-container>
+
+        <ng-template #templateName>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin']">
+              Admin
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/associated']">
+              Asociados
+            </a>
+          </li>
+        </ng-template>
       </ul>
     </div>
   </div>

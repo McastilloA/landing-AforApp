@@ -1,12 +1,13 @@
 /* Global */
-#af-section3 .af-description h3,
+#af-section3 .af-description h2,
 #af-section3 .af-description p,
 #af-section3 .af-description li {
   color: #ffffff !important;
 }
 
-.w-80 {
-  max-width: 80%;
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 #af-section4 .af-carousel .card-img-top {
@@ -20,6 +21,14 @@
   h1 {
     font-weight: 700;
     letter-spacing: -0.6px;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1rem;
   }
 
   #af-main {
@@ -69,6 +78,10 @@
 
   .af-description {
     order: 2;
+  }
+
+  .af-image {
+    margin-bottom: 24px;
   }
 
   #af-section1,

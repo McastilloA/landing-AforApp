@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
@@ -7,6 +7,7 @@ import { LoadingComponent } from 'src/app/shared/components/loading/loading.comp
 import { RespServiceAssociated } from 'src/app/shared/interfaces/respService';
 
 import { ListAssociatedService } from 'src/app/shared/services/associated/list-associated.service';
+import { SetMetaTagService } from 'src/app/shared/services/setMetaTag/setMetaTag.service';
 import { AlertService } from 'src/app/shared/services/message/alert.service';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,7 +16,7 @@ import { faUserCircle, faEnvelope, faPhone, faMapMarkerAlt } from "@fortawesome/
 @Component({
   selector: 'app-contact-us',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, ReactiveFormsModule, LoadingComponent],
+  imports: [FontAwesomeModule, ReactiveFormsModule, LoadingComponent],
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.css'],
   providers: [DatePipe]
@@ -23,17 +24,20 @@ import { faUserCircle, faEnvelope, faPhone, faMapMarkerAlt } from "@fortawesome/
 export class ContactUsComponent implements OnInit {
 
   /** Variabls globales */
-  faUserCircle = faUserCircle;
-  faEnvelope = faEnvelope;
-  faPhone = faPhone;
-  faMapMarkerAlt = faMapMarkerAlt;
-  nowDate!: Date;
-  formGroupAssociated!: FormGroup;
-  showSpinner!: boolean;
+  public faUserCircle = faUserCircle;
+  public faEnvelope = faEnvelope;
+  public faPhone = faPhone;
+  public faMapMarkerAlt = faMapMarkerAlt;
+  private nowDate!: Date;
+  public formGroupAssociated!: FormGroup;
+  public showSpinner!: boolean;
+  private setMetaTagService = inject(SetMetaTagService);
 
   constructor(private fb: FormBuilder, private datepipe: DatePipe,
     private listAssociatedService: ListAssociatedService,
-    private alertService: AlertService) { }
+    private alertService: AlertService) {
+    this.setMetaTagService.setMetaTag('Contáctanos', 'Envia tu mensaje', 'contáctanos, comunicate con nosotros, más información');
+  }
 
   ngOnInit(): void {
     this.intiForm();

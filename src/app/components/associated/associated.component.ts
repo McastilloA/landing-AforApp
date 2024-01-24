@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
-
 import { ListAssociatedService } from 'src/app/shared/services/associated/list-associated.service';
+import { SetMetaTagService } from 'src/app/shared/services/setMetaTag/setMetaTag.service';
 import { AlertService } from 'src/app/shared/services/message/alert.service';
-
 import { RespServiceAssociated } from 'src/app/shared/interfaces/respService';
 import { Associated } from 'src/app/shared/interfaces/associated';
 
@@ -24,17 +23,20 @@ import { faUsers, faPhone, faEdit, faEnvelope } from "@fortawesome/free-solid-sv
 export class AssociatedComponent implements OnInit {
 
   /** Variabls globales */
-  faUsers = faUsers;
-  faPhone = faPhone;
-  faEnvelope = faEnvelope;
-  faEdit = faEdit;
-  nowDate!: Date;
-  formGroupAssociated!: FormGroup;
-  listAssociated!: RespServiceAssociated;
-  showSpinner!: boolean;
+  public faUsers = faUsers;
+  public faPhone = faPhone;
+  public faEnvelope = faEnvelope;
+  public faEdit = faEdit;
+  public nowDate!: Date;
+  public formGroupAssociated!: FormGroup;
+  public listAssociated!: RespServiceAssociated;
+  public showSpinner!: boolean;
+  private setMetaTagService = inject(SetMetaTagService);
 
-  constructor(private fb: FormBuilder, private datepipe: DatePipe, 
-    private listAssociatedService: ListAssociatedService, private alertService: AlertService) { }
+  constructor(private fb: FormBuilder, private datepipe: DatePipe,
+    private listAssociatedService: ListAssociatedService, private alertService: AlertService) {
+    this.setMetaTagService.setMetaTag('Asociados', 'Listado de asociados', 'usuarios, listado, datos, ingresar datos');
+  }
 
   ngOnInit(): void {
     this.intiForm();

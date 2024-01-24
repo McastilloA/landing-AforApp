@@ -22,11 +22,14 @@
 <section class="fade-in-bottom diagonal-box bg-blue-light" id="af-section1">
   <div class="container padding-container">
     <div class="row align-items-center">
-      <div class="col-sm-12 col-md-6 text-center af-image mb-3">
-        <img class="img-fluid w-80" src="assets/img/boy-mobile.png" alt="img-left">
+      <div class="col-sm-12 col-md-6 text-center af-image">
+        <picture>
+          <source srcset="assets/img/boy-mobile.WEBP" class="position-relative" type="image/WEBP">
+          <img [ngSrc]="'assets/img/boy-mobile.WEBP'" class="position-relative" alt="img-left" fill priority>
+        </picture>
       </div>
       <div class="col-sm-12 col-md-6 af-description">
-        <h3>Controla el éxito de tus eventos con nuestro sistema de gestión de aforos.</h3>
+        <h2>Controla el éxito de tus eventos con nuestro sistema de gestión de aforos.</h2>
         <p>
           Nuestro sistema avanzado te permite gestionar y controla el aforo de tu evento de manera eficiente y
           efectiva. Asegura la seguridad de tus asistentes y crea un evento exitoso con nuestro sistema de gestión de
@@ -41,7 +44,7 @@
   <div class="container padding-container">
     <div class="row align-items-center">
       <div class="col-sm-12 col-md-6 af-description">
-        <h3>El éxito de tu evento seguro y efectivo comienza aquí.</h3>
+        <h2>El éxito de tu evento seguro y efectivo comienza aquí.</h2>
         <p>
           Nuestro objetivo es el registro de la
           cantidad de asociados por mes y año, lo que puede ser útil para realizar
@@ -86,10 +89,12 @@
             </tbody>
           </table>
         </div>
-
       </div>
       <div class="col-sm-12 col-md-6 text-center af-image">
-        <img class="img-fluid w-80" src="assets/img/mobile.png" alt="img-rigth">
+        <picture>
+          <source srcset="assets/img/mobile.WEBP" class="position-relative" type="image/WEBP">
+          <img [ngSrc]="'assets/img/mobile.WEBP'" class="position-relative" alt="img-rigth" fill>
+        </picture>
       </div>
     </div>
   </div>
@@ -99,11 +104,14 @@
   <div class="container padding-container">
 
     <div class="row align-items-center">
-      <div class="col-sm-12 col-md-6 text-center af-image mb-3">
-        <img class="img-fluid w-80" src="assets/img/computer.png" alt="img-left">
+      <div class="col-sm-12 col-md-6 text-center af-image">
+        <picture>
+          <source ngSrcset="assets/img/computer.WEBP" class="position-relative" type="image/WEBP">
+          <img [ngSrc]="'assets/img/computer.WEBP'" class="position-relative" alt="img-left" fill>
+        </picture>
       </div>
       <div class="col-sm-12 col-md-6 af-description">
-        <h3>¡Crea eventos exitosos!</h3>
+        <h2>¡Crea eventos exitosos!</h2>
         <p>
           Con el control adecuado del aforo, puedes crear un ambiente seguro y cómodo para tus asistentes garantizando:
         </p>
@@ -127,7 +135,7 @@
     <div class="row">
 
       <div class="col-12 af-carousel">
-        <h3 class="text-center">"Lo que nuestros clientes dicen sobre nosotros"</h3>
+        <h2 class="text-center">"Lo que nuestros clientes dicen sobre nosotros"</h2>
 
         <p class="text-center description">
           Lee lo que nuestros clientes tienen que decir sobre nuestro sistema de gestión de aforos y cómo ha ayudado a
@@ -137,7 +145,6 @@
 
         <div id="carouselExample" class="carousel slide">
           <div class="carousel-inner">
-
             <div class="carousel-item active">
               <div class="row">
                 <div class="col-md-6 offset-md-3">
@@ -151,8 +158,8 @@
                       </p>
 
                       <div class="text-center">
-                        <img src="https://picsum.photos/id/65/150" class="img-fluid card-img-top mb-2" alt="img-1">
-                        <h6 class="card-title mb-0 text-center">Sandra Rodriguez</h6>
+                        <img [ngSrc]="'https://picsum.photos/id/65/150'" height="150" width="150" class="img-fluid card-img-top mb-2" alt="img-1">
+                        <h3 class="card-title mb-0 text-center">Sandra Rodriguez</h3>
                         <small class="text-body-secondary">Organizadora de eventos corporativos</small>
                       </div>
                     </div>
@@ -176,8 +183,8 @@
                         ayuda para mi negocio!".
                       </p>
                       <div class="text-center">
-                        <img src="https://picsum.photos/id/22/150" class="img-fluid card-img-top mb-2" alt="img-1">
-                        <h6 class="card-title mb-0 text-center">Pedro Juan</h6>
+                        <img [ngSrc]="'https://picsum.photos/id/22/150'" height="150" width="150" class="img-fluid card-img-top mb-2" alt="img-1">
+                        <h3 class="card-title mb-0 text-center">Pedro Juan</h3>
                         <small class="text-body-secondary">Dueño de una empresa de catering</small>
                       </div>
                     </div>
@@ -197,11 +204,12 @@
                       <p class="card-text">
                         "Nuestros conciertos ahora son mucho más seguros y eficientes gracias a esta herramienta de
                         gestión de aforos. Pudimos evitar situaciones de sobrepaso de capacidad y garantizar que
-                        nuestros asistentes disfrutaran de una experiencia inolvidable. ¡Recomiendo esta herramienta!".
+                        nuestros asistentes disfrutaran de una experiencia inolvidable, recomiendo esta herramienta,
+                        ¡Felicitaciones!".
                       </p>
                       <div class="text-center">
-                        <img src="https://picsum.photos/id/64/150" class="img-fluid card-img-top mb-2" alt="img-1">
-                        <h6 class="card-title mb-0 text-center">Karla Pertuz</h6>
+                        <img [ngSrc]="'https://picsum.photos/id/64/150'" height="150" width="150" class="img-fluid card-img-top mb-2" alt="img-1">
+                        <h3 class="card-title mb-0 text-center">Karla Pertuz</h3>
                         <small class="text-body-secondary">Organizadora de conciertos</small>
                       </div>
                     </div>
@@ -211,7 +219,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
 
             <div class="carousel-item">
@@ -227,8 +234,8 @@
                       </p>
 
                       <div class="text-center">
-                        <img src="https://picsum.photos/id/633/150" class="img-fluid card-img-top mb-2" alt="img-1">
-                        <h6 class="card-title mb-0 text-center">Ana Torres</h6>
+                        <img [ngSrc]="'https://picsum.photos/id/633/150'" height="150" width="150" class="img-fluid card-img-top mb-2" alt="img-1">
+                        <h3 class="card-title mb-0 text-center">Ana Torres</h3>
                         <small class="text-body-secondary">Organizadora de eventos corporativos</small>
                       </div>
                     </div>
@@ -253,8 +260,8 @@
                         ayuda para mi negocio!".
                       </p>
                       <div class="text-center">
-                        <img src="https://picsum.photos/id/237/150" class="img-fluid card-img-top mb-2" alt="img-1">
-                        <h6 class="card-title mb-0 text-center">Carlos Javier</h6>
+                        <img [ngSrc]="'https://picsum.photos/id/237/150'" height="150" width="150" class="img-fluid card-img-top mb-2" alt="img-1">
+                        <h3 class="card-title mb-0 text-center">Carlos Javier</h3>
                         <small class="text-body-secondary">Dueño de una empresa de catering</small>
                       </div>
                     </div>
@@ -278,8 +285,8 @@
                         nuestros asistentes disfrutaran de una experiencia inolvidable. ¡Recomiendo esta herramienta!".
                       </p>
                       <div class="text-center">
-                        <img src="https://picsum.photos/id/219/150" class="img-fluid card-img-top mb-2" alt="img-1">
-                        <h6 class="card-title mb-0 text-center">Laura Florez</h6>
+                        <img [ngSrc]="'https://picsum.photos/id/219/150'" height="150" width="150" class="img-fluid card-img-top mb-2" alt="img-1">
+                        <h3 class="card-title mb-0 text-center">Laura Florez</h3>
                         <small class="text-body-secondary">Organizadora de conciertos</small>
                       </div>
                     </div>
@@ -289,15 +296,16 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
 
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"
+            aria-label="btnPrevCarousel" id="btnPrev">
             <fa-icon [icon]="faArrowLeft"></fa-icon>
             <fa-icon [icon]="faArrowLeft" class="visually-hidden"></fa-icon>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next"
+            aria-label="btnNextCarousel" id="btnNext">
             <fa-icon [icon]="faArrowRight"></fa-icon>
             <fa-icon [icon]="faArrowRight" class="visually-hidden"></fa-icon>
           </button>

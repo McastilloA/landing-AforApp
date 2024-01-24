@@ -1,36 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&family=Open+Sans:wght@300;700&family=Poppins:wght@200;400;600&family=Roboto:wght@100;300;400;700&display=swap');
 
 html, body {
   height: 100%;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Poppins", sans-serif;
+  color: #2c2a29 !important;
+  text-align: justify;
+}
+
 p {
   color: #2c2a29 !important;
   text-align: justify;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Poppins", sans-serif;
-}
-
-p,
-a, li {
+p, a, li {
   font-family: "Open Sans", sans-serif;
   text-align: justify;
-  /* font-family: 'Montserrat', sans-serif; */
-  /* font-family: "Poppins", sans-serif; */
-  /* font-family: "Roboto", sans-serif; */
 }
 
 .diagonal-box:before {
@@ -53,35 +41,20 @@ a, li {
   z-index: -1;
 }
 
-.bg-blue-light:before {
+.bg-blue-light, .bg-blue-light:before {
   background-color: #7dccff;
 }
 
-.bg-blue-light {
-  background-color: #7dccff;
-}
-
-.bg-blue-dark:before {
+.bg-blue-dark, .bg-blue-dark:before {
   background-color: #1190cb;
 }
 
-.bg-blue-dark {
-  background-color: #1190cb;
-}
 
-.bg-white:before {
+.bg-white, .bg-white:before {
   background-color: #ffffff;
 }
 
-.bg-white {
-  background-color: #ffffff;
-}
-
-.bg-gray:before {
-  background-color: #f4f4f4;
-}
-
-.bg-gray {
+.bg-gray, .bg-gray:before {
   background-color: #f4f4f4 !important;
 }
 
