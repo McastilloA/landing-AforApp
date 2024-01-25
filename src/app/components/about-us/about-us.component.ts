@@ -16,4 +16,8 @@ export class AboutUsComponent {
     this.setMetaTagService.setMetaTag('Quiénes somos', 'El ABC de AFORAPP', '¿Para quién es?, ¡Calidad y compromiso!, ¡Expertos en tecnología!');
   }
 
+  ngAfterViewInit() {
+    this.setMetaTagService.scrollToTop();
+  }
+
 }
