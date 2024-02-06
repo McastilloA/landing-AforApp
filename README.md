@@ -1,11 +1,11 @@
 # Landing-AforApp
 
 Imagenes que evidencian que el proyecto se encuentra funcional.
-![image](https://github.com/McastilloA/ProyectoFinalUnidad1/assets/43456634/6df1b192-d4a6-4171-931e-779e4756a545)
+![image](https://github.com/McastilloA/landing-AforApp/assets/43456634/6df1b192-d4a6-4171-931e-779e4756a545)
 
 ![image](./src/assets/img/image-2.png)
 
-![image-3](https://github.com/McastilloA/ProyectoFinalUnidad1/assets/43456634/ba9f66fd-aa17-465f-92fe-a0f6b834169c)
+![image-3](https://github.com/McastilloA/landing-AforApp/assets/43456634/ba9f66fd-aa17-465f-92fe-a0f6b834169c)
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.11.
