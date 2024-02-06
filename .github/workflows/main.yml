@@ -40,13 +40,13 @@ jobs:
 
       # Rename name dist/project to dist/404 for Route dinamic
       - name: Rename index for routing
-        run: mv dist/proyecto-final-unidad1/index.html dist/proyecto-final-unidad1/404.html
+        run: mv dist/landing-AforApp/index.html dist/landing-AforApp/404.html
 
       # Deploy to GitHub Pages
       - name: Deploy to pages
         uses: crazy-max/ghaction-github-pages@v4.0.0
         with:
           target_branch: "gh-pages"
-          build_dir: dist/proyecto-final-unidad1
+          build_dir: dist/landing-AforApp
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

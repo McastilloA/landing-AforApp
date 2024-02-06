@@ -1,4 +1,4 @@
-# ProyectoFinalUnidad1
+# Landing-AforApp
 
 Imagenes que evidencian que el proyecto se encuentra funcional.
 ![image](https://github.com/McastilloA/ProyectoFinalUnidad1/assets/43456634/6df1b192-d4a6-4171-931e-779e4756a545)
