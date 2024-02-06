@@ -9,7 +9,6 @@
             <small>Fecha Actual: {{nowDate | date:'longDate'}}</small>
           </div>
         </div>
-
         <div class="col-md-8">
           <div class="card-body">
             <div class="row">
@@ -20,7 +19,6 @@
                       required>
                     <label for="fullName">Nombres completos:*</label>
                   </div>
-
                   <div class="row">
                     <div class="col-md-6">
                       <div class="mb-4 form-floating">
@@ -37,7 +35,6 @@
                       </div>
                     </div>
                   </div>
-
                   <div class="mb-4 form-floating">
                     <input type="text" class="form-control" id="affair" formControlName="affair" maxlength="50"
                       required>
@@ -47,7 +44,6 @@
                     <textarea class="form-control" id="messageContactUs" formControlName="message"></textarea>
                     <label for="messageContactUs">Mensaje:</label>
                   </div>
-
                   <div class="d-grid gap-2">
                     <button class="btn btn-primary" type="submit" (click)="updateUser()"
                       [disabled]="formGroupAssociated.invalid">Actualizar
@@ -91,18 +87,10 @@
               <td>{{user.timeNowDate}}</td>
               <td class="text-capitalize">{{user.affair}}</td>
               <td>{{user.message}}</td>
-              <!-- <td class="text-center">
-                <button type="button" class="btn btn-secondary" (click)="scrollToSectionTop(register, user)">
-                  <fa-icon [icon]="faEdit" [size]="'sm'"></fa-icon>
-                </button>
-              </td> -->
               <td class="text-center">
                 <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer" class="btn btn-success">
                   <fa-icon [icon]="faPhone" [size]="'sm'"></fa-icon>
                 </a>
-                <!-- <button type="button" class="btn btn-success" (click)="deleteUser(user)">
-                  <fa-icon [icon]="faPhone" [size]="'sm'"></fa-icon>
-                </button> -->
               </td>
               <td class="text-center">
                 <a href="https://outlook.live.com/" target="_blank" rel="noopener noreferrer"
@@ -121,4 +109,4 @@
   </div>
 </section>
 
-<app-loading [hidden]="!showSpinner"/>
+<app-loading [hidden]="!showSpinner" />

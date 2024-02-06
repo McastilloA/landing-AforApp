@@ -1,17 +1,18 @@
-<nav class="navbar navbar-expand-lg fixed-top bg-gray nav-padding">
+<nav class="navbar navbar-expand-lg fixed-top bg-gray nav-padding" id="nav-section" #navbar>
   <div class="container">
-    <a class="navbar-brand" [routerLink]="['/inicio']" fragment="af-main">
-      <img [ngSrc]="'assets/img/logo.WEBP'" width="140" height="60" class="d-inline-block align-text-top" alt="Logo"
+    <a class="navbar-brand" [routerLink]="['/inicio']">
+      <img [ngSrc]="'assets/img/logo.webp'" width="140" height="60" class="d-inline-block align-text-top" alt="Logo"
         priority>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" #btn>
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
+    <div class="collapse navbar-collapse" id="navbarText" #navbarText>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" [routerLink]="['/inicio']" fragment="af-main" routerLinkActive="router-link-active">
+          <a class="nav-link active" [routerLink]="['/inicio']"
+            routerLinkActive="router-link-active">
             Inicio
           </a>
         </li>
@@ -22,7 +23,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/inicio']" fragment="af-section4">
+            <a class="nav-link" [routerLink]="['/inicio']" [fragment]="'af-section4'">
               Testimonios
             </a>
           </li>

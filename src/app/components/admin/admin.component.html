@@ -1,4 +1,4 @@
-<section class="fade-in-bottom diagonal-box bg-white" id="register" #register>
+<section class="fade-in-bottom diagonal-box bg-white" id="register">
   <div class="container">
     <div class="card mb-4">
       <div class="row g-0">
@@ -126,13 +126,14 @@
                 </button>
               </td>
               <td class="text-center">
-                <button type="button" class="btn btn-secondary" (click)="scrollToSectionTop(register, user)"
+                <button type="button" class="btn btn-secondary" (click)="scrollToSectionTop(user)"
                   [disabled]="user.timeAfterDate">
                   <fa-icon [icon]="faEdit" [size]="'sm'"></fa-icon>
                 </button>
               </td>
               <td class="text-center">
-                <button type="button" class="btn btn-primary" (click)="registerExit(user)" [disabled]="user.timeAfterDate">
+                <button type="button" class="btn btn-primary" (click)="registerExit(user)"
+                  [disabled]="user.timeAfterDate">
                   <fa-icon [icon]="faSignOut" [size]="'sm'"></fa-icon>
                 </button>
               </td>
@@ -147,4 +148,4 @@
   </div>
 </section>
 
-<app-loading [hidden]="!showSpinner"/>
+<app-loading [hidden]="!showSpinner" />

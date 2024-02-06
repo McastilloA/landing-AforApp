@@ -1,14 +1,14 @@
 <div class="container-fluid p-0 padding-container bg-blue-light">
   <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 pt-5 mx-0">
     <div class="col-md-4 col-sm-12 mb-4 text-center bg-white py-3">
-      <img [ngSrc]="'assets/img/logo.WEBP'" width="300" height="130" class="img-fluid" alt="Logo" priority>
+      <img [ngSrc]="'assets/img/logo.webp'" width="300" height="130" class="img-fluid" alt="Logo" priority>
     </div>
 
     <div class="col-md-2 offset-md-1 col-sm-12 mb-4 interest">
       <p class="h5">Te puede interesar</p>
       <ul class="nav flex-column">
         <li class="nav-item mb-2">
-          <a [routerLink]="['/inicio']" fragment="af-main" routerLinkActive="router-link-active"
+          <a [routerLink]="['/inicio']" routerLinkActive="router-link-active"
             class="nav-link active p-0">
             Inicio
           </a>
@@ -19,7 +19,7 @@
           </a>
         </li>
         <li class="nav-item mb-2">
-          <a [routerLink]="['/inicio']" fragment="af-section4" class="nav-link p-0">
+          <a [routerLink]="['/inicio']" [fragment]="'af-section4'" class="nav-link p-0">
             Testimonios
           </a>
         </li>

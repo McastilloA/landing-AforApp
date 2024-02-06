@@ -1,16 +1,17 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, inject } from '@angular/core';
 
 import { ListCapacityService } from 'src/app/shared/services/capacity/list-capacity.service';
 import { SetMetaTagService } from 'src/app/shared/services/setMetaTag/setMetaTag.service';
 import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
+import { AlertService } from 'src/app/shared/services/message/alert.service';
 import { RespService } from 'src/app/shared/interfaces/respService';
 import { Capacity } from 'src/app/shared/interfaces/capacity';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faQrcode, faTrash, faEdit, faSignOut } from "@fortawesome/free-solid-svg-icons";
-import Swal from 'sweetalert2';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -20,9 +21,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin.component.css'],
   providers: [DatePipe]
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Variabls globales */
+  private unSubscribe$ = new Subject<void>();
   public faQrcode = faQrcode;
   public faTrash = faTrash;
   public faEdit = faEdit;
@@ -34,13 +36,18 @@ export class AdminComponent implements OnInit {
   public action = 0;
   private setMetaTagService = inject(SetMetaTagService);
 
-  constructor(private fb: FormBuilder, private datepipe: DatePipe, private listCapacityService: ListCapacityService) {
+  constructor(private fb: FormBuilder, private datepipe: DatePipe, private listCapacityService: ListCapacityService,
+    private alertService: AlertService) {
     this.setMetaTagService.setMetaTag('Admin', 'Listado de usuarios registrados', 'usuarios, listado, datos, ingresar datos');
   }
 
   ngOnInit(): void {
     this.capacityForm();
     this.getAllUser();
+  }
+
+  ngAfterViewInit() {
+    this.setMetaTagService.scrollToTop();
   }
 
   capacityForm(): void {
@@ -61,64 +68,67 @@ export class AdminComponent implements OnInit {
 
   getAllUser(): void {
     this.showSpinner = true;
-    this.listCapacityService.getAllCapacity().subscribe({
-      next: (resp: RespService) => {
-        this.showSpinner = false;
-        if (resp.status) {
-          this.listUsers = resp;
-        } else {
-          this.toastFail(resp.message);
+    this.listCapacityService.getAllCapacity().pipe(takeUntil(this.unSubscribe$))
+      .subscribe({
+        next: (resp: RespService) => {
+          this.showSpinner = false;
+          if (resp.status) {
+            this.listUsers = resp;
+          } else {
+            this.alertService.toastFail(resp.message);
+          }
+        },
+        error: () => {
+          this.showSpinner = false;
+          this.alertService.modalFail();
         }
-      },
-      error: () => {
-        this.showSpinner = false;
-        this.modalFail();
-      }
-    });
+      });
   }
 
   registerUser(): void {
     if (this.formGroupCapacity.valid) {
       this.showSpinner = true;
-      this.listCapacityService.addCapacity(this.formGroupCapacity.value).subscribe({
-        next: (resp: RespService) => {
-          if (resp.status) {
-            this.getAllUser();
-            this.formGroupCapacity.reset();
-            this.toastSuccess(resp.message);
-          } else {
+      this.listCapacityService.addCapacity(this.formGroupCapacity.value).pipe(takeUntil(this.unSubscribe$))
+        .subscribe({
+          next: (resp: RespService) => {
+            if (resp.status) {
+              this.getAllUser();
+              this.formGroupCapacity.reset();
+              this.alertService.toastSuccess(resp.message);
+            } else {
+              this.showSpinner = false;
+              this.alertService.toastFail(resp.message);
+            }
+          },
+          error: () => {
             this.showSpinner = false;
-            this.toastFail(resp.message);
-          }
-        },
-        error: () => {
-          this.showSpinner = false;
-          this.modalFail();
-        },
-      });
+            this.alertService.modalFail();
+          },
+        });
     }
   }
 
   updateUser(): void {
     if (this.formGroupCapacity.valid) {
       this.showSpinner = true;
-      this.listCapacityService.updateCapacity(this.formGroupCapacity.value).subscribe({
-        next: (resp: RespService) => {
-          if (resp.status) {
-            this.action = 0;
-            this.getAllUser();
-            this.formGroupCapacity.reset();
-            this.toastSuccess(resp.message);
-          } else {
+      this.listCapacityService.updateCapacity(this.formGroupCapacity.value).pipe(takeUntil(this.unSubscribe$))
+        .subscribe({
+          next: (resp: RespService) => {
+            if (resp.status) {
+              this.action = 0;
+              this.getAllUser();
+              this.formGroupCapacity.reset();
+              this.alertService.toastSuccess(resp.message);
+            } else {
+              this.showSpinner = false;
+              this.alertService.toastFail(resp.message);
+            }
+          },
+          error: () => {
             this.showSpinner = false;
-            this.toastFail(resp.message);
-          }
-        },
-        error: () => {
-          this.showSpinner = false;
-          this.modalFail();
-        },
-      });
+            this.alertService.modalFail();
+          },
+        });
     }
   }
 
@@ -128,46 +138,48 @@ export class AdminComponent implements OnInit {
     const request: any = user;
     request.timeAfterDate = this.datepipe.transform(this.nowDate, 'yyyy-MM-dd hh:mm:ss');
 
-    this.listCapacityService.updateCapacity(request).subscribe({
-      next: (resp: RespService) => {
-        this.showSpinner = false;
-        if (resp.status) {
-          this.getAllUser();
-          this.toastSuccess(resp.message);
-        } else {
-          this.toastFail(resp.message);
-        }
-      },
-      error: () => {
-        this.showSpinner = false;
-        this.modalFail();
-      },
-    });
+    this.listCapacityService.updateCapacity(request).pipe(takeUntil(this.unSubscribe$))
+      .subscribe({
+        next: (resp: RespService) => {
+          this.showSpinner = false;
+          if (resp.status) {
+            this.getAllUser();
+            this.alertService.toastSuccess(resp.message);
+          } else {
+            this.alertService.toastFail(resp.message);
+          }
+        },
+        error: () => {
+          this.showSpinner = false;
+          this.alertService.modalFail();
+        },
+      });
   }
 
   deleteUser(userId: Capacity): void {
     this.showSpinner = true;
-    this.listCapacityService.deleteCapacity(userId).subscribe({
-      next: (resp: RespService) => {
-        if (resp.status) {
-          this.getAllUser();
-          this.toastSuccess(resp.message);
-        } else {
+    this.listCapacityService.deleteCapacity(userId).pipe(takeUntil(this.unSubscribe$))
+      .subscribe({
+        next: (resp: RespService) => {
+          if (resp.status) {
+            this.getAllUser();
+            this.alertService.toastSuccess(resp.message);
+          } else {
+            this.showSpinner = false;
+            this.alertService.toastFail(resp.message);
+          }
+        },
+        error: () => {
           this.showSpinner = false;
-          this.toastFail(resp.message);
-        }
-      },
-      error: () => {
-        this.showSpinner = false;
-        this.modalFail();
-      },
-    });
+          this.alertService.modalFail();
+        },
+      });
   }
 
-  scrollToSectionTop(section: HTMLElement, userInfo: Capacity): void {
+  scrollToSectionTop(userInfo: Capacity): void {
     this.action = 1;
     this.updateUserInField(userInfo);
-    section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    this.setMetaTagService.scrollToTop();
   }
 
   updateUserInField(userInfo: Capacity) {
@@ -185,46 +197,9 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  /**
-   * Función que abre el modal por falla de servidor.
-   */
-  modalFail() {
-    Swal.fire({
-      title: 'Error del servidor',
-      text: '"Lo sentimos, se ha producido un error en el servidor y no se puede completar tu solicitud en este momento."',
-      icon: 'error',
-      confirmButtonText: 'Cerrar',
-      confirmButtonColor: '#3085d6',
-    });
-  }
-
-  /**
-   * Función que abre toast satisfactorio.
-   * @param message descripción del mensaje.
-   */
-  toastSuccess(message: any) {
-    Swal.fire({
-      title: message,
-      icon: 'success',
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
-  }
-
-  /**
-   * Función que abre toast fallido.
-   * @param message descripción del mensaje.
-   */
-  toastFail(message: any) {
-    Swal.fire({
-      title: 'Lo sentimos',
-      text: message,
-      icon: 'info',
-      position: 'top-right',
-      showConfirmButton: false,
-      timer: 4000
-    });
+  ngOnDestroy(): void {
+    this.unSubscribe$.next();
+    this.unSubscribe$.complete();
   }
 
 }

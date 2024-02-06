@@ -7,8 +7,6 @@ import Swal from 'sweetalert2';
 })
 export class AlertService {
 
-  constructor() { }
-
   /**
    * Función que abre el modal por falla de servidor.
    */

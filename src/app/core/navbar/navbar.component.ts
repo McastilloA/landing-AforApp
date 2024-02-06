@@ -1,6 +1,8 @@
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild, inject } from '@angular/core';
 import { NgIf, NgOptimizedImage } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationStart } from '@angular/router';
+
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -8,13 +10,22 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule, NgIf, NgOptimizedImage],
   templateUrl: './navbar.component.html'
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Variabls globales */
-  stateRol!: string;
+  public stateRol!: string;
+  private unSubscribe$ = new Subject<void>();
+  @ViewChild("navbarText") navbar!: ElementRef;
+  @ViewChild("btn") btn!: ElementRef;
+  private router = inject(Router);
+  private render = inject(Renderer2);
 
   ngOnInit(): void {
     this.validateRol();
+  }
+
+  ngAfterViewInit() {
+    this.subscribeToRouterEvents();
   }
 
   /**
@@ -25,6 +36,29 @@ export class NavbarComponent implements OnInit {
    */
   validateRol(): void {
     this.stateRol = sessionStorage.getItem('rol') || 'user';
+  }
+
+  /**
+   * Subscribes to router events and hides the navbar when a navigation start event occurs.
+   * @returns {void}
+   */
+  subscribeToRouterEvents() {
+    this.router.events.pipe(takeUntil(this.unSubscribe$)).subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.hideNavbar();
+      }
+    });
+  }
+
+  hideNavbar() {
+    this.render.removeClass(this.navbar.nativeElement, 'show');
+    this.render.addClass(this.btn.nativeElement, 'collapsed');
+    this.render.setAttribute(this.btn.nativeElement, 'aria-expanded', 'false');
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribe$.next();
+    this.unSubscribe$.complete();
   }
 
 }
