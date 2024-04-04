@@ -8,12 +8,29 @@
 img {
   max-width: 100%;
   height: auto;
+  width: 100%;
+}
+
+img.boy {
+  aspect-ratio: 1/1;
+}
+
+img.mobile {
+  aspect-ratio: 601/623;
+}
+
+img.computer {
+  aspect-ratio: 641/577;
 }
 
 #af-section4 .af-carousel .card-img-top {
   border-radius: 50%;
   height: 150px;
   width: 150px;
+}
+
+h1 {
+  width: fit-content;
 }
 
 /* Desktop */
