@@ -39,6 +39,7 @@ yarn-error.log
 testem.log
 /typings
 .package-lock.json
+.pnpm-lock.yaml
 
 # System files
 .DS_Store
